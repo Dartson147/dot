@@ -5,7 +5,7 @@ vim.opt.guicursor = ""
 vim.opt.encoding = "utf-8"
 vim.opt.ruler = true
 vim.opt.nu = true
---vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
 vim.opt.showtabline = 2
