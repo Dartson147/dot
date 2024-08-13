@@ -1,10 +1,12 @@
-local lsp = require('lsp-zero')
+local lsp_zero = require('lsp-zero')
 
-lsp.preset("recommended")
-lsp.on_attach(function(client, bufnr)
+--lsp.preset("recommended")
+local lsp_attach = function(client, bufnr)
+--lsp.on_attach(function(client, bufnr)
+
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
---  lsp.default_keymaps({buffer = bufnr})
+lsp_zero.default_keymaps({buffer = bufnr})
 --
   local opts = {buffer = bufnr, remap = false}
 
@@ -20,10 +22,10 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, opts)
-end)
+end
 
 local cmp = require('cmp')
-
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 cmp.setup({
   sources = {
     {name = 'nvim_lsp'},
@@ -57,17 +59,36 @@ cmp.setup({
   },
 })
 
+require'cmp_nvim_lsp'.default_capabilities()
 require'lspconfig'.lua_ls.setup{}
-require'lspconfig'.ccls.setup{
-	on_attach = on_attach,
-	flagss = lsp_flags,
+
+--require'lspconfig'.ccls.setup{
+--	on_attach = on_attach,
+--	flagss = lsp_flags,
+--}
+
+require'lspconfig'.pyright.setup {
+  python = {
+    analysis = {
+      autoSearchPaths = true,
+      diagnosticMode = "openFilesOnly",
+      useLibraryCodeForTypes = true
+    }
+  }
 }
 
-
+require'lspconfig'.tsserver.setup {}
+require'lspconfig'.rust_analyzer.setup {
+  -- Server-specific settings. See `:help lspconfig-setup`
+  settings = {
+    ['rust-analyzer'] = {}
+  }
+}
 require'lspconfig'.clangd.setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
+
 
 require'lspconfig'.clojure_lsp.setup{}
 require'lspconfig'.bashls.setup{}
@@ -103,4 +124,4 @@ require'lspconfig'.texlab.setup{
 }
 require'lspconfig'.textlsp.setup{}
 
-lsp.setup()
+--lsp.setup()

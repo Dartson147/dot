@@ -8,10 +8,10 @@ require("telescope").setup({
       layout_config = {
         preview_height = 0.8,
       },
-	  diff_context_lines = vim.o.scrolloff,
+      diff_context_lines = vim.o.scrolloff,
       entry_format = "state #$ID, $STAT, $TIME",
       time_format = "",
-     -- vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>"),
+      -- vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>"),
       mappings = {
         i = {
           -- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
