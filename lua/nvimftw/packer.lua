@@ -23,8 +23,11 @@ return require('packer').startup(function(use)
 	'nvim-lualine/lualine.nvim',
 	requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 }
-
 	use "rebelot/kanagawa.nvim"
+	use {
+		'nvim-tree/nvim-tree.lua',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+	}
 	use 'lervag/vimtex'
 	use 'SirVer/ultisnips'
 	use ('xuhdev/vim-latex-live-preview')
